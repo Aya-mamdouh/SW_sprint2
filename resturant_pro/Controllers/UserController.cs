@@ -33,5 +33,41 @@ namespace resturant_pro.Controllers
             ViewBag.SuccessMessage = "Registration Successful.";
             return View("AddOrEdit", new User());
         }
+
+
+        //Login 
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Authorize(User user)
+        {
+            using (DbModels dbModel = new DbModels())
+            {
+                var UserDetails = dbModel.Users.Where(x => x.UserName == user.UserName && x.Password == user.Password).FirstOrDefault();
+                if (UserDetails == null)
+                {
+                    user.LoginErrorMessege = "Wrong username or password";
+                    return View("Login", user);
+                }
+                else
+                {
+                    Session["UserId"] = UserDetails.Id;
+                    Session["UserName"] = UserDetails.UserName;
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+        }
+
+        // LogOut 
+        public ActionResult LogOut()
+        {
+            //   int userID = (int)Session["UserId"];
+            Session.Abandon();
+            return RedirectToAction("Login", "User");
+        }
     }
 }

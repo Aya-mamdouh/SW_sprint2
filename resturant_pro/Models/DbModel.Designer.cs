@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\DELL\Desktop\resturant_pro\resturant_pro\Models\DbModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\usr\Desktop\Project_SW\SW_Resturant____\resturant_pro\Models\DbModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
