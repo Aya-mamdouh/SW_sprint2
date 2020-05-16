@@ -8,8 +8,29 @@
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Meals" Relationship="DatabaseModel.UserMeal" FromRole="User" ToRole="Meal" />
   </EntityType>
   <EntityContainer Name="DbModels" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Meals" EntityType="DatabaseModel.Meal" />
+    <AssociationSet Name="UserMeal" Association="DatabaseModel.UserMeal">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Meal" EntitySet="Meals" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Meal">
+    <Key>
+      <PropertyRef Name="MealId" />
+    </Key>
+    <Property Name="MealId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="DatabaseModel.UserMeal" FromRole="Meal" ToRole="User" />
+  </EntityType>
+  <Association Name="UserMeal">
+    <End Type="DatabaseModel.User" Role="User" Multiplicity="*" />
+    <End Type="DatabaseModel.Meal" Role="Meal" Multiplicity="*" />
+  </Association>
 </Schema>

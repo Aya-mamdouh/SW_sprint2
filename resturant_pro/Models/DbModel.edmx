@@ -4,7 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Meal">
+          <Key>
+            <PropertyRef Name="MealId" />
+          </Key>
+          <Property Name="MealId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Image" Type="varbinary(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -14,11 +24,52 @@
           <Property Name="Address" Type="varchar" MaxLength="50" />
           <Property Name="Password" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="UserMeal">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="MealId" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="MealId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserMeal" Type="Self.UserMeal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserMeal">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK1">
+          <End Role="Meal" Type="Self.Meal" Multiplicity="1" />
+          <End Role="UserMeal" Type="Self.UserMeal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meal">
+              <PropertyRef Name="MealId" />
+            </Principal>
+            <Dependent Role="UserMeal">
+              <PropertyRef Name="MealId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="Meal" EntityType="Self.Meal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMeal" EntityType="Self.UserMeal" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK" Association="Self.FK">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserMeal" EntitySet="UserMeal" />
+          </AssociationSet>
+          <AssociationSet Name="FK1" Association="Self.FK1">
+            <End Role="Meal" EntitySet="Meal" />
+            <End Role="UserMeal" EntitySet="UserMeal" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -30,11 +81,32 @@
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
+          <NavigationProperty Name="Meals" Relationship="DatabaseModel.UserMeal" FromRole="User" ToRole="Meal" />
+          </EntityType>
         <EntityContainer Name="DbModels" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.User" />
-        </EntityContainer>
-      </Schema>
+          <EntitySet Name="Meals" EntityType="DatabaseModel.Meal" />
+          <AssociationSet Name="UserMeal" Association="DatabaseModel.UserMeal">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Meal" EntitySet="Meals" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Meal">
+          <Key>
+            <PropertyRef Name="MealId" />
+          </Key>
+          <Property Name="MealId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="DatabaseModel.UserMeal" FromRole="Meal" ToRole="User" />
+        </EntityType>
+        <Association Name="UserMeal">
+          <End Type="DatabaseModel.User" Role="User" Multiplicity="*" />
+          <End Type="DatabaseModel.Meal" Role="Meal" Multiplicity="*" />
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -50,6 +122,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Meals">
+            <EntityTypeMapping TypeName="DatabaseModel.Meal">
+              <MappingFragment StoreEntitySet="Meal">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MealId" ColumnName="MealId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserMeal" TypeName="DatabaseModel.UserMeal" StoreEntitySet="UserMeal">
+            <EndProperty Name="Meal">
+              <ScalarProperty Name="MealId" ColumnName="MealId" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

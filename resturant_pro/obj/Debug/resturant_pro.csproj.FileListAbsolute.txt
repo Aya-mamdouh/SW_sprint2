@@ -225,3 +225,7 @@ C:\Users\usr\Desktop\Project_SW\SW_Resturant____\resturant_pro\obj\Debug\restura
 C:\Users\usr\Desktop\Project_SW\SW_Resturant____\resturant_pro\obj\Debug\resturant_pro.csproj.CopyComplete
 C:\Users\usr\Desktop\Project_SW\SW_Resturant____\resturant_pro\obj\Debug\resturant_pro.dll
 C:\Users\usr\Desktop\Project_SW\SW_Resturant____\resturant_pro\obj\Debug\resturant_pro.pdb
+E:\pro\SW_Resturant____\resturant_pro\obj\Debug\resturant_pro.csprojAssemblyReference.cache
+E:\pro\SW_Resturant____\resturant_pro\obj\Debug\resturant_pro.csproj.CoreCompileInputs.cache
+E:\pro\SW_Resturant____\resturant_pro\obj\Debug\resturant_pro.dll
+E:\pro\SW_Resturant____\resturant_pro\obj\Debug\resturant_pro.pdb
