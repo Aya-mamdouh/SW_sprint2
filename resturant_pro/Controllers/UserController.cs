@@ -53,6 +53,12 @@ namespace resturant_pro.Controllers
                     user.LoginErrorMessege = "Wrong username or password";
                     return View("Login", user);
                 }
+
+                else if (UserDetails.UserName == "Admin" && UserDetails.Password == "Admin")
+                {
+                    return RedirectToAction("Admin", "Admin");
+                }
+
                 else
                 {
                     Session["UserId"] = UserDetails.Id;
