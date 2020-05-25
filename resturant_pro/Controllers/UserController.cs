@@ -75,5 +75,15 @@ namespace resturant_pro.Controllers
             Session.Abandon();
             return RedirectToAction("Login", "User");
         }
+        //ShowUsers
+        [HttpGet]
+        public ActionResult Users(int id = 0)
+        {
+            using (DbModels dbModel = new DbModels())
+            {
+                return View(dbModel.Users.ToList());
+            }
+        }
+
     }
 }
