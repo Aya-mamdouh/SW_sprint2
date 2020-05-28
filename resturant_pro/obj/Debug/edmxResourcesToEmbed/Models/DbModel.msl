@@ -14,8 +14,8 @@
     <EntitySetMapping Name="Meals">
       <EntityTypeMapping TypeName="DatabaseModel.Meal">
         <MappingFragment StoreEntitySet="Meal">
-          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="MealId" ColumnName="MealId" />

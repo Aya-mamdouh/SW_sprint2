@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="633c122f64444e98bb95f35b3cb68e96" Name="Diagram1">
         <EntityTypeShape EntityType="DatabaseModel.User" Width="1.5" PointX="0.875" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatabaseModel.Meal" Width="1.5" PointX="4" PointY="0.875" />
+        <EntityTypeShape EntityType="DatabaseModel.Meal" Width="1.5" PointX="3.375" PointY="0.75" />
         <AssociationConnector Association="DatabaseModel.UserMeal" />
       </Diagram>
     </edmx:Diagrams>

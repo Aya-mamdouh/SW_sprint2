@@ -4,11 +4,11 @@
     <Key>
       <PropertyRef Name="MealId" />
     </Key>
-    <Property Name="MealId" Type="int" Nullable="false" />
+    <Property Name="MealId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="Price" Type="float" />
-    <Property Name="Image" Type="varbinary(max)" />
     <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Image" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="User">
     <Key>

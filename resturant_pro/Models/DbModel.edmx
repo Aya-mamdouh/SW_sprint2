@@ -9,11 +9,11 @@
           <Key>
             <PropertyRef Name="MealId" />
           </Key>
-          <Property Name="MealId" Type="int" Nullable="false" />
+          <Property Name="MealId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Price" Type="float" />
-          <Property Name="Image" Type="varbinary(max)" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -95,11 +95,11 @@
           <Key>
             <PropertyRef Name="MealId" />
           </Key>
-          <Property Name="MealId" Type="Int32" Nullable="false" />
+          <Property Name="MealId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Double" />
-          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="DatabaseModel.UserMeal" FromRole="Meal" ToRole="User" />
         </EntityType>
         <Association Name="UserMeal">
@@ -125,8 +125,8 @@
           <EntitySetMapping Name="Meals">
             <EntityTypeMapping TypeName="DatabaseModel.Meal">
               <MappingFragment StoreEntitySet="Meal">
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MealId" ColumnName="MealId" />
@@ -141,7 +141,7 @@
               <ScalarProperty Name="Id" ColumnName="Id" />
             </EndProperty>
           </AssociationSetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
