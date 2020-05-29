@@ -204,6 +204,8 @@
     <Content Include="Views\Meal\Details.cshtml" />
     <Content Include="Views\Meal\Edit.cshtml" />
     <Content Include="Views\Meal\Index.cshtml" />
+    <Content Include="Views\Meal\Create.cshtml" />
+    <Content Include="Views\Meal\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

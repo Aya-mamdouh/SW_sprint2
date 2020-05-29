@@ -85,8 +85,61 @@ namespace resturant_pro.Controllers
         }
 
 
-        
-        
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "MealId,Name,Price,Image,Description")] Meal meal, HttpPostedFileBase imgFile)
+        {
+            if (ModelState.IsValid)
+            {
+                string path = "";
+                if (imgFile.FileName.Length > 0)
+                {
+                    path = "~/pics/" + Path.GetFileName(imgFile.FileName);
+                    imgFile.SaveAs(Server.MapPath(path));
+
+                }
+                meal.Image = path;
+
+                db.Meals.Add(meal);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(meal);
+        }
+
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Meal meal = db.Meals.Find(id);
+            if (meal == null)
+            {
+                return HttpNotFound();
+            }
+            return View(meal);
+        }
+
+        // POST: Meal/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Meal meal = db.Meals.Find(id);
+            db.Meals.Remove(meal);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {
