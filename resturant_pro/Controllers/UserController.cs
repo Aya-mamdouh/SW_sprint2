@@ -4,11 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using resturant_pro.Models;
+using System.Net;
 
 namespace resturant_pro.Controllers
 {
     public class UserController : Controller
     {
+
+        private DbModels db = new DbModels();
         // GET: User
         [HttpGet]
         public ActionResult AddOrEdit (int id=0)
@@ -68,6 +71,7 @@ namespace resturant_pro.Controllers
             }
         }
 
+        
         // LogOut 
         public ActionResult LogOut()
         {
