@@ -27,5 +27,6 @@ namespace resturant_pro.Models
     
         public virtual DbSet<Meal> Meals { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
     }
 }
