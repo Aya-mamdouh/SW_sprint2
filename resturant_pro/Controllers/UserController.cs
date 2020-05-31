@@ -11,7 +11,7 @@ namespace resturant_pro.Controllers
     public class UserController : Controller
     {
 
-        private DbModels db = new DbModels();
+        private DatabaseEntities1 db = new DatabaseEntities1();
         // GET: User
         [HttpGet]
         public ActionResult AddOrEdit (int id=0)
@@ -22,7 +22,7 @@ namespace resturant_pro.Controllers
         [HttpPost]
         public ActionResult AddOrEdit(User userModel )
         {
-            using (DbModels dbModel = new DbModels())
+            using (DatabaseEntities1 dbModel = new DatabaseEntities1())
             {
                 if(dbModel.Users.Any(x => x.UserName == userModel.UserName))
                 {
@@ -48,7 +48,7 @@ namespace resturant_pro.Controllers
         [HttpPost]
         public ActionResult Authorize(User user)
         {
-            using (DbModels dbModel = new DbModels())
+            using (DatabaseEntities1 dbModel = new DatabaseEntities1())
             {
                 var UserDetails = dbModel.Users.Where(x => x.UserName == user.UserName && x.Password == user.Password).FirstOrDefault();
                 if (UserDetails == null)
@@ -83,7 +83,7 @@ namespace resturant_pro.Controllers
         [HttpGet]
         public ActionResult Users(int id = 0)
         {
-            using (DbModels dbModel = new DbModels())
+            using (DatabaseEntities1 dbModel = new DatabaseEntities1())
             {
                 return View(dbModel.Users.ToList());
             }

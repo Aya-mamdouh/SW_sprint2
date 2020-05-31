@@ -13,10 +13,10 @@ namespace resturant_pro.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DbModels : DbContext
+    public partial class DatabaseEntities1 : DbContext
     {
-        public DbModels()
-            : base("name=DbModels")
+        public DatabaseEntities1()
+            : base("name=DatabaseEntities1")
         {
         }
     
@@ -25,7 +25,7 @@ namespace resturant_pro.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Meal> Meals { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

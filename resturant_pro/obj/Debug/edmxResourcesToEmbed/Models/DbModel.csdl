@@ -1,23 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="User">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Meals" Relationship="DatabaseModel.UserMeal" FromRole="User" ToRole="Meal" />
-  </EntityType>
-  <EntityContainer Name="DbModels" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Users" EntityType="Self.User" />
-    <EntitySet Name="Meals" EntityType="DatabaseModel.Meal" />
-    <AssociationSet Name="UserMeal" Association="DatabaseModel.UserMeal">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Meal" EntitySet="Meals" />
-    </AssociationSet>
-  </EntityContainer>
   <EntityType Name="Meal">
     <Key>
       <PropertyRef Name="MealId" />
@@ -27,10 +9,28 @@
     <Property Name="Price" Type="Double" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Users" Relationship="DatabaseModel.UserMeal" FromRole="Meal" ToRole="User" />
+    <NavigationProperty Name="Users" Relationship="Self.UserMeal" FromRole="Meal" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Meals" Relationship="Self.UserMeal" FromRole="User" ToRole="Meal" />
   </EntityType>
   <Association Name="UserMeal">
-    <End Type="DatabaseModel.User" Role="User" Multiplicity="*" />
-    <End Type="DatabaseModel.Meal" Role="Meal" Multiplicity="*" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <End Role="Meal" Type="Self.Meal" Multiplicity="*" />
   </Association>
+  <EntityContainer Name="DatabaseEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Meals" EntityType="Self.Meal" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="UserMeal" Association="Self.UserMeal">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Meal" EntitySet="Meals" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>

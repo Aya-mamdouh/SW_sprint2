@@ -12,7 +12,7 @@ namespace resturant_pro.Controllers
 {
     public class AdminController : Controller
     {
-        private DbModels db = new DbModels();
+        private DatabaseEntities1 db = new DatabaseEntities1();
 
         // GET: Admin
         public ActionResult Admin()
