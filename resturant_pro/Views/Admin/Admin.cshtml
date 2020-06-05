@@ -5,12 +5,7 @@
 <h2> Admin System </h2>
 <body style="background-image:url('../../images/666.jpg');">
 
-    <!-- Add User -->
-    <p>
-        @Html.ActionLink("Add New User", "Create", null, new { @class = "btn btn-info" })
-        <span class="glyphicon glyphicon-plus "></span>
 
-    </p>
 
 
     <!-- Search -->
@@ -20,9 +15,13 @@
 
     <!-- Meal Controller -->
     <div class="form-group">
-        <input type="button" onclick="location.href='@Url.Action("Index", "Meal")'" value="Meals Controll" class="btn btn-info" />
+        <input type="button" onclick="location.href='@Url.Action("Index", "Meal")'" value=" Manage Meals" class="btn btn-info" />
     </div>
 
+    <!-- Employee Controller -->
+    <div class="form-group">
+        <input type="button" onclick="location.href='@Url.Action("Index", "Employee")'" value="Manage Employee" class="btn btn-info" />
+    </div>
 
 
     <!-- Log out -->
