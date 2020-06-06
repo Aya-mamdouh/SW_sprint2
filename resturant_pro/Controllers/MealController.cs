@@ -58,7 +58,7 @@ namespace resturant_pro.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Name,Price,Description,Image ")] Meal meal, HttpPostedFileBase imgFile)
+        public ActionResult Edit([Bind(Include = "MealId,Name,Price,Description ")] Meal meal, HttpPostedFileBase imgFile)
         {
 
             string path = "";

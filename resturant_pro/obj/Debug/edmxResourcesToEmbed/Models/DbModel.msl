@@ -22,14 +22,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="UserMeal" TypeName="DatabaseModel.UserMeal" StoreEntitySet="UserMeal">
-      <EndProperty Name="User">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-      <EndProperty Name="Meal">
-        <ScalarProperty Name="MealId" ColumnName="MealId" />
-      </EndProperty>
-    </AssociationSetMapping>
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="DatabaseModel.Employee">
         <MappingFragment StoreEntitySet="Employee">
@@ -38,6 +30,15 @@
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="DatabaseModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="MealId" ColumnName="MealId" />
+          <ScalarProperty Name="orderId" ColumnName="orderId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

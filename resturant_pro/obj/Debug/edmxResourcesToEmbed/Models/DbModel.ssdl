@@ -20,6 +20,14 @@
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="Image" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="orderId" />
+    </Key>
+    <Property Name="orderId" Type="int" Nullable="false" />
+    <Property Name="MealId" Type="int" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
   <EntityType Name="User">
     <Key>
       <PropertyRef Name="Id" />
@@ -29,34 +37,26 @@
     <Property Name="Address" Type="varchar" MaxLength="50" />
     <Property Name="Password" Type="varchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="UserMeal">
-    <Key>
-      <PropertyRef Name="Id" />
-      <PropertyRef Name="MealId" />
-    </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="MealId" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="FK">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
-    <End Role="UserMeal" Type="Self.UserMeal" Multiplicity="*" />
+  <Association Name="FK_Order_ToTable">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="UserMeal">
-        <PropertyRef Name="Id" />
+      <Dependent Role="Order">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK1">
-    <End Role="Meal" Type="Self.Meal" Multiplicity="1" />
-    <End Role="UserMeal" Type="Self.UserMeal" Multiplicity="*" />
+  <Association Name="kk">
+    <End Role="Meal" Type="Self.Meal" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Meal">
         <PropertyRef Name="MealId" />
       </Principal>
-      <Dependent Role="UserMeal">
+      <Dependent Role="Order">
         <PropertyRef Name="MealId" />
       </Dependent>
     </ReferentialConstraint>
@@ -64,15 +64,15 @@
   <EntityContainer Name="DatabaseModelStoreContainer">
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Meal" EntityType="Self.Meal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="UserMeal" EntityType="Self.UserMeal" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK" Association="Self.FK">
+    <AssociationSet Name="FK_Order_ToTable" Association="Self.FK_Order_ToTable">
       <End Role="User" EntitySet="User" />
-      <End Role="UserMeal" EntitySet="UserMeal" />
+      <End Role="Order" EntitySet="Order" />
     </AssociationSet>
-    <AssociationSet Name="FK1" Association="Self.FK1">
+    <AssociationSet Name="kk" Association="Self.kk">
       <End Role="Meal" EntitySet="Meal" />
-      <End Role="UserMeal" EntitySet="UserMeal" />
+      <End Role="Order" EntitySet="Order" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

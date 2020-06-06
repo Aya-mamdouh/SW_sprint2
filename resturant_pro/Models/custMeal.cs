@@ -12,7 +12,6 @@ namespace resturant_pro.Models
 
 
 
-
     }
 
     public class MealMetaData

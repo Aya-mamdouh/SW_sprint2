@@ -18,10 +18,13 @@
             @Html.ValidationMessageFor(x => x.Password)
         </div>
 
-        <input type="submit" name="name" value="Login" style="margin:8px;" class="btn btn-primary" />
+        <input type="submit" name="name" value="sign in" style="margin:8px;" class="btn btn-primary" />
 
         <input type="submit" name="name" value="Clear" style="margin:8px;" class="btn btn-primary" />
-
+        <n/>
+        <div class="form-group">
+            <input type="button" onclick="location.href='@Url.Action("AddOrEdit", "User")'" value="sign up" class="btn btn-info" />
+        </div>
 
     }
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
