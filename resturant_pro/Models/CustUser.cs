@@ -10,6 +10,8 @@ namespace resturant_pro.Models
     [MetadataType(typeof(UserMetaData))]
     public partial class User
     {
+        [DataType(DataType.Password)]
+        [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
 

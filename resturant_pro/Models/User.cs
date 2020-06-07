@@ -11,7 +11,9 @@ namespace resturant_pro.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,10 +23,16 @@ namespace resturant_pro.Models
         }
     
         public int Id { get; set; }
+        [Required(ErrorMessage = "This field is required")]
         public string UserName { get; set; }
+        [Required(ErrorMessage = "This field is required")]
         public string Address { get; set; }
+        [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
-    
+
+       
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
     }
