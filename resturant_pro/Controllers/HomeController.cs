@@ -11,7 +11,7 @@ namespace resturant_pro.Controllers
     {
         // GET: Home
         // GET: Home
-        private DatabaseEntities1 db = new DatabaseEntities1();
+        private DatabaseEntities db = new DatabaseEntities();
         public ActionResult Index(string searching)
         {
             var Meals = db.Meals.Where(s => s.Name.Contains(searching) || searching == null).ToList();

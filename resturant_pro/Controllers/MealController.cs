@@ -13,7 +13,7 @@ namespace resturant_pro.Controllers
 {
     public class MealController : Controller
     {
-        private DatabaseEntities1 db = new DatabaseEntities1();
+        private DatabaseEntities db = new DatabaseEntities();
 
         // GET: Meal
         public ActionResult Index(string searching)

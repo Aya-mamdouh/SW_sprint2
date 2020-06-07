@@ -12,7 +12,7 @@ namespace resturant_pro.Controllers
 {
     public class EmployeeController : Controller
     {
-        private DatabaseEntities1 db = new DatabaseEntities1();
+        private DatabaseEntities db = new DatabaseEntities();
 
         // GET: Employee
         public ActionResult Index()
