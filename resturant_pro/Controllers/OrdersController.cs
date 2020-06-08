@@ -24,6 +24,12 @@ namespace resturant_pro.Controllers
             db.SaveChanges();
             return Redirect(Request.UrlReferrer.ToString());
         }
+        public ActionResult ViewOrders()
+        {
+            int id = (int)Session["UserId"];
+
+            return View(db.Database.SqlQuery<Meal>("Select * from Meal where MealId IN (select MealId from orderMeal where USERID =" + id + ")").ToList<Meal>());
+        }
 
     }
 }
