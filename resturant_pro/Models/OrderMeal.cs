@@ -12,7 +12,7 @@ namespace resturant_pro.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class OrderMeal
     {
         public int orderId { get; set; }
         public Nullable<int> MealId { get; set; }

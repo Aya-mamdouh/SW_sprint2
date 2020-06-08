@@ -11,7 +11,6 @@ namespace resturant_pro.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class User
@@ -19,7 +18,7 @@ namespace resturant_pro.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Orders = new HashSet<Order>();
+            this.OrderMeals = new HashSet<OrderMeal>();
         }
     
         public int Id { get; set; }
@@ -30,10 +29,10 @@ namespace resturant_pro.Models
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
-       
+        //public string ConfirmPassword { get; set; }
+        public string LoginErrorMessege { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<OrderMeal> OrderMeals { get; set; }
     }
 }

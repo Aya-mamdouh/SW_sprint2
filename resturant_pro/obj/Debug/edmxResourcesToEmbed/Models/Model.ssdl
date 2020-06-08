@@ -20,7 +20,7 @@
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="Image" Type="nvarchar(max)" />
   </EntityType>
-  <EntityType Name="Order">
+  <EntityType Name="OrderMeal">
     <Key>
       <PropertyRef Name="orderId" />
     </Key>
@@ -36,43 +36,44 @@
     <Property Name="UserName" Type="varchar" MaxLength="50" />
     <Property Name="Address" Type="varchar" MaxLength="50" />
     <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="ConfirmPassword" Type="varchar" MaxLength="50" />
   </EntityType>
-  <Association Name="FK_Order_To User">
-    <End Role="User" Type="Self.User" Multiplicity="0..1" />
-    <End Role="Order" Type="Self.Order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="kk">
+  <Association Name="foreign_Meal">
     <End Role="Meal" Type="Self.Meal" Multiplicity="0..1" />
-    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <End Role="OrderMeal" Type="Self.OrderMeal" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Meal">
         <PropertyRef Name="MealId" />
       </Principal>
-      <Dependent Role="Order">
+      <Dependent Role="OrderMeal">
         <PropertyRef Name="MealId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="forien_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="OrderMeal" Type="Self.OrderMeal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderMeal">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="DatabaseModelStoreContainer">
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Meal" EntityType="Self.Meal" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderMeal" EntityType="Self.OrderMeal" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Order_To User" Association="Self.FK_Order_To User">
-      <End Role="User" EntitySet="User" />
-      <End Role="Order" EntitySet="Order" />
-    </AssociationSet>
-    <AssociationSet Name="kk" Association="Self.kk">
+    <AssociationSet Name="foreign_Meal" Association="Self.foreign_Meal">
       <End Role="Meal" EntitySet="Meal" />
-      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderMeal" EntitySet="OrderMeal" />
+    </AssociationSet>
+    <AssociationSet Name="forien_User" Association="Self.forien_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="OrderMeal" EntitySet="OrderMeal" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

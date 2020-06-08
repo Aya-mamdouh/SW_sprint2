@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0b68e741e8264cee879c340737e6f2bb" Name="Diagram1">
-        <EntityTypeShape EntityType="DatabaseModel.Employee" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatabaseModel.Meal" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatabaseModel.Order" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatabaseModel.User" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <AssociationConnector Association="DatabaseModel.kk" ManuallyRouted="false" />
-        <AssociationConnector Association="DatabaseModel.FK_Order_To_User" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="DatabaseModel.Employee" Width="1.5" PointX="2.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Meal" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.User" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.OrderMeal" Width="1.5" PointX="4.625" PointY="1.875" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseModel.foreign_Meal" />
+        <AssociationConnector Association="DatabaseModel.forien_User" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

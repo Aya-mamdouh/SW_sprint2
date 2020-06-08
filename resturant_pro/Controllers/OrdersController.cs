@@ -17,12 +17,13 @@ namespace resturant_pro.Controllers
         
         public ActionResult order_now(int id)
         {
-            Order order = new Order();
+            OrderMeal order = new OrderMeal();
             order.MealId = id;
             order.UserId = (int)Session["UserId"];
-            db.Orders.Add(order);
+            db.OrderMeals.Add(order);
             db.SaveChanges();
             return Redirect(Request.UrlReferrer.ToString());
         }
+
     }
 }

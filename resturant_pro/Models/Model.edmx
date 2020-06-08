@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="id" />
@@ -25,7 +25,7 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Image" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="Order">
+        <EntityType Name="OrderMeal">
           <Key>
             <PropertyRef Name="orderId" />
           </Key>
@@ -41,47 +41,47 @@
           <Property Name="UserName" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="varchar" MaxLength="50" />
           <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="ConfirmPassword" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_Order_To User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="kk">
+        <Association Name="foreign_Meal">
           <End Role="Meal" Type="Self.Meal" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Role="OrderMeal" Type="Self.OrderMeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Meal">
               <PropertyRef Name="MealId" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="OrderMeal">
               <PropertyRef Name="MealId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="forien_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="OrderMeal" Type="Self.OrderMeal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderMeal">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DatabaseModelStoreContainer">
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Meal" EntityType="Self.Meal" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderMeal" EntityType="Self.OrderMeal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Order_To User" Association="Self.FK_Order_To User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="kk" Association="Self.kk">
+          <AssociationSet Name="foreign_Meal" Association="Self.foreign_Meal">
             <End Role="Meal" EntitySet="Meal" />
-            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderMeal" EntitySet="OrderMeal" />
+          </AssociationSet>
+          <AssociationSet Name="forien_User" Association="Self.forien_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="OrderMeal" EntitySet="OrderMeal" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -104,17 +104,7 @@
           <Property Name="Price" Type="Double" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="Self.kk" FromRole="Meal" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="orderId" />
-          </Key>
-          <Property Name="orderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MealId" Type="Int32" />
-          <Property Name="UserId" Type="Int32" />
-          <NavigationProperty Name="Meal" Relationship="Self.kk" FromRole="Order" ToRole="Meal" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Order_To_User" FromRole="Order" ToRole="User" />
+          <NavigationProperty Name="OrderMeals" Relationship="DatabaseModel.foreign_Meal" FromRole="Meal" ToRole="OrderMeal" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -124,47 +114,58 @@
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_To_User" FromRole="User" ToRole="Order" />
+          <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OrderMeals" Relationship="DatabaseModel.forien_User" FromRole="User" ToRole="OrderMeal" />
         </EntityType>
-        <Association Name="kk">
-          <End Role="Meal" Type="Self.Meal" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Meals" EntityType="Self.Meal" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="OrderMeals" EntityType="DatabaseModel.OrderMeal" />
+          <AssociationSet Name="foreign_Meal" Association="DatabaseModel.foreign_Meal">
+            <End Role="Meal" EntitySet="Meals" />
+            <End Role="OrderMeal" EntitySet="OrderMeals" />
+          </AssociationSet>
+          <AssociationSet Name="forien_User" Association="DatabaseModel.forien_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="OrderMeal" EntitySet="OrderMeals" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="OrderMeal">
+          <Key>
+            <PropertyRef Name="orderId" />
+          </Key>
+          <Property Name="orderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MealId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Meal" Relationship="DatabaseModel.foreign_Meal" FromRole="OrderMeal" ToRole="Meal" />
+          <NavigationProperty Name="User" Relationship="DatabaseModel.forien_User" FromRole="OrderMeal" ToRole="User" />
+        </EntityType>
+        <Association Name="foreign_Meal">
+          <End Type="DatabaseModel.Meal" Role="Meal" Multiplicity="0..1" />
+          <End Type="DatabaseModel.OrderMeal" Role="OrderMeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Meal">
               <PropertyRef Name="MealId" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="OrderMeal">
               <PropertyRef Name="MealId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Order_To_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+        <Association Name="forien_User">
+          <End Type="DatabaseModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="DatabaseModel.OrderMeal" Role="OrderMeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Order">
+            <Dependent Role="OrderMeal">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
-          <EntitySet Name="Meals" EntityType="Self.Meal" />
-          <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="kk" Association="Self.kk">
-            <End Role="Meal" EntitySet="Meals" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_To_User" Association="Self.FK_Order_To_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -192,22 +193,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="DatabaseModel.Order">
-              <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="orderId" ColumnName="orderId" />
-                <ScalarProperty Name="MealId" ColumnName="MealId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="DatabaseModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderMeals">
+            <EntityTypeMapping TypeName="DatabaseModel.OrderMeal">
+              <MappingFragment StoreEntitySet="OrderMeal">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MealId" ColumnName="MealId" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

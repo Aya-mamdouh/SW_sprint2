@@ -17,7 +17,7 @@ namespace resturant_pro.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Meal()
         {
-            this.Orders = new HashSet<Order>();
+            this.OrderMeals = new HashSet<OrderMeal>();
         }
     
         public int MealId { get; set; }
@@ -27,6 +27,6 @@ namespace resturant_pro.Models
         public string Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<OrderMeal> OrderMeals { get; set; }
     }
 }

@@ -19,17 +19,7 @@
     <Property Name="Price" Type="Double" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Orders" Relationship="Self.kk" FromRole="Meal" ToRole="Order" />
-  </EntityType>
-  <EntityType Name="Order">
-    <Key>
-      <PropertyRef Name="orderId" />
-    </Key>
-    <Property Name="orderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MealId" Type="Int32" />
-    <Property Name="UserId" Type="Int32" />
-    <NavigationProperty Name="Meal" Relationship="Self.kk" FromRole="Order" ToRole="Meal" />
-    <NavigationProperty Name="User" Relationship="Self.FK_Order_To_User" FromRole="Order" ToRole="User" />
+    <NavigationProperty Name="OrderMeals" Relationship="DatabaseModel.foreign_Meal" FromRole="Meal" ToRole="OrderMeal" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -39,44 +29,55 @@
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Orders" Relationship="Self.FK_Order_To_User" FromRole="User" ToRole="Order" />
+    <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OrderMeals" Relationship="DatabaseModel.forien_User" FromRole="User" ToRole="OrderMeal" />
   </EntityType>
-  <Association Name="kk">
-    <End Role="Meal" Type="Self.Meal" Multiplicity="0..1" />
-    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+  <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Meals" EntityType="Self.Meal" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="OrderMeals" EntityType="DatabaseModel.OrderMeal" />
+    <AssociationSet Name="foreign_Meal" Association="DatabaseModel.foreign_Meal">
+      <End Role="Meal" EntitySet="Meals" />
+      <End Role="OrderMeal" EntitySet="OrderMeals" />
+    </AssociationSet>
+    <AssociationSet Name="forien_User" Association="DatabaseModel.forien_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="OrderMeal" EntitySet="OrderMeals" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="OrderMeal">
+    <Key>
+      <PropertyRef Name="orderId" />
+    </Key>
+    <Property Name="orderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MealId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="Meal" Relationship="DatabaseModel.foreign_Meal" FromRole="OrderMeal" ToRole="Meal" />
+    <NavigationProperty Name="User" Relationship="DatabaseModel.forien_User" FromRole="OrderMeal" ToRole="User" />
+  </EntityType>
+  <Association Name="foreign_Meal">
+    <End Type="DatabaseModel.Meal" Role="Meal" Multiplicity="0..1" />
+    <End Type="DatabaseModel.OrderMeal" Role="OrderMeal" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Meal">
         <PropertyRef Name="MealId" />
       </Principal>
-      <Dependent Role="Order">
+      <Dependent Role="OrderMeal">
         <PropertyRef Name="MealId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Order_To_User">
-    <End Role="User" Type="Self.User" Multiplicity="0..1" />
-    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+  <Association Name="forien_User">
+    <End Type="DatabaseModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="DatabaseModel.OrderMeal" Role="OrderMeal" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Order">
+      <Dependent Role="OrderMeal">
         <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Employees" EntityType="Self.Employee" />
-    <EntitySet Name="Meals" EntityType="Self.Meal" />
-    <EntitySet Name="Orders" EntityType="Self.Order" />
-    <EntitySet Name="Users" EntityType="Self.User" />
-    <AssociationSet Name="kk" Association="Self.kk">
-      <End Role="Meal" EntitySet="Meals" />
-      <End Role="Order" EntitySet="Orders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Order_To_User" Association="Self.FK_Order_To_User">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Order" EntitySet="Orders" />
-    </AssociationSet>
-  </EntityContainer>
 </Schema>

@@ -53,7 +53,7 @@ namespace resturant_pro.Controllers
                 var UserDetails = dbModel.Users.Where(x => x.UserName == user.UserName && x.Password == user.Password).FirstOrDefault();
                 if (UserDetails == null)
                 {
-                    //user.LoginErrorMessege = "Wrong username or password";
+                    user.LoginErrorMessege = "Wrong username or password";
                     return View("Login", user);
                 }
 
