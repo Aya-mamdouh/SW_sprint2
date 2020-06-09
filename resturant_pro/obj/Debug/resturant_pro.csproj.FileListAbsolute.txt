@@ -1366,3 +1366,30 @@ C:\Users\aya\Desktop\final sw\SW_sprint2\resturant_pro\obj\Debug\resturant_pro.c
 C:\Users\aya\Desktop\final sw\SW_sprint2\resturant_pro\obj\Debug\resturant_pro.csproj.CopyComplete
 C:\Users\aya\Desktop\final sw\SW_sprint2\resturant_pro\obj\Debug\resturant_pro.dll
 C:\Users\aya\Desktop\final sw\SW_sprint2\resturant_pro\obj\Debug\resturant_pro.pdb
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\resturant_pro.dll.config
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\resturant_pro.dll
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\resturant_pro.pdb
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\EntityFramework.dll
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\EntityFramework.SqlServer.dll
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\System.Web.Helpers.dll
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\System.Web.Mvc.dll
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\System.Web.Razor.dll
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\System.Web.Webpages.Deployment.dll
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\System.Web.Webpages.dll
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\System.Web.Webpages.Razor.dll
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\EntityFramework.xml
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\EntityFramework.SqlServer.xml
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\System.Web.Razor.xml
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\System.Web.Webpages.xml
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\System.Web.Webpages.Deployment.xml
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\System.Web.Webpages.Razor.xml
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\System.Web.Helpers.xml
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\System.Web.Mvc.xml
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\obj\Debug\resturant_pro.csprojAssemblyReference.cache
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\obj\Debug\resturant_pro.csproj.CoreCompileInputs.cache
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\obj\Debug\resturant_pro.csproj.CopyComplete
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\obj\Debug\resturant_pro.dll
+C:\Users\usr\Desktop\SW_Project\SW_sprint2\resturant_pro\obj\Debug\resturant_pro.pdb

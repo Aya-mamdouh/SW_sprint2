@@ -1,0 +1,72 @@
+﻿@model List<resturant_pro.Models.Meal>
+
+@{
+    ViewBag.Title = "ViewOrders";
+}
+
+<h2>ViewOrders</h2>
+
+<body style="background-image:url('../../images/backgrond.jpg');">
+    <style>
+        .button {
+            background-color: #F1C510;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition-duration: 0.4s;
+        }
+
+            .button:hover {
+                background-color: #110F07;
+            }
+    </style>
+
+    <br />
+    <br />
+    <br />
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                Meal name
+            </th>
+            <th>
+                Meal price
+            </th>
+            <th>
+                Meal image
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Image)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("DeleteOrder", "Orders" , new { id = item.MealId })'"> Delete </button>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</body>
