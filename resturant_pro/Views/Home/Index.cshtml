@@ -10,12 +10,18 @@
 }
 
 
-<h2>Welcom To Our Restueant</h2>
+<h2>Welcom To Our Resturant</h2>
 <body style="background-image:url('../../images/666.jpg');">
 
-
-
-
+   
+        <input type="button" onclick="location.href='@Url.Action("Login", "User")'" value="sign in" class="btn btn-info" />
+    
+    
+        <input type="button" onclick="location.href='@Url.Action("AddOrEdit", "User")'" value="sign up" class="btn btn-primary" />
+         <br/>
+         <br/>
+    
+    
 
 
     @using (Html.BeginForm("Index", "Meal", FormMethod.Get))
@@ -24,11 +30,11 @@
         @Html.TextBox("Searching")<input type="submit" value="search" />
 
     }
-
+    <br/>
     <button class="btn btn-primary" onclick="location.href='@Url.Action("ViewOrders","Orders")'" type="submit" style="background-color:#405fd1;"> View Orders</button>
 
-
-    <div class="col-md-4">
+    <br/>
+    
         <table class="table">
             <tr>
                 <th>
@@ -37,7 +43,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Price)
                 </th>
-
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.Image)
@@ -49,31 +57,32 @@
             @foreach (var item in Model)
             {
 
-                <tr>
+            <tr>
 
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+                <td>
+                    <img src="@Url.Content(item.Image)" width="120" height="120" />
+                </td>
+                <td>
 
 
-                    <td>
-                        <img src="@Url.Content(item.Image)" width="120" height="120" />
-                    </td>
-                    <td>
+                    <br />
 
+                    <a href="@Url.Action("order_now" ,"Orders" ,new { id= item.MealId  })" style="color: white" class="btn btn-success">order</a>
+                    <br />
+                </td>
 
-                        @Html.ActionLink("Details", "Details", new { id = item.MealId }, new { @class = "btn btn-primary" })
-                        <br />
-
-                        <a href="@Url.Action("order_now" ,"Orders" ,new { id= item.MealId  })" style="color: white" class="btn btn-success">order</a>
-                        <br />
-                    </td>
-
-                </tr>
+            </tr>
 
 
             }
@@ -85,5 +94,5 @@
 
 
 
-    </div>
+    
 </body>

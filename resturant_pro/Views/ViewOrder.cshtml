@@ -31,9 +31,7 @@
     <br />
     <br />
     <br />
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+   
 
     <table class="table">
         <tr>
@@ -59,7 +57,7 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Image)
+                    <img src="@Url.Content(item.Image)" width="120" height="120" />
                 </td>
                 <td>
                     <button class="btn btn-primary" onclick="location.href='@Url.Action("DeleteOrder","Orders")'" type="submit" style="background-color:#405fd1;"> Delete Orders</button>

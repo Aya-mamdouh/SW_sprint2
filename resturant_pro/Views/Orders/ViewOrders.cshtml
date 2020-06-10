@@ -6,7 +6,7 @@
 
 <h2>ViewOrders</h2>
 
-<body style="background-image:url('../../images/backgrond.jpg');">
+<body style="background-image:url('../../images/666.jpg');">
     <style>
         .button {
             background-color: #F1C510;
@@ -31,9 +31,7 @@
     <br />
     <br />
     <br />
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+    
 
     <table class="table">
         <tr>
@@ -59,7 +57,7 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Image)
+                    <img src="@Url.Content(item.Image)" width="120" height="120" />
                 </td>
                 <td>
                     <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("DeleteOrder", "Orders" , new { id = item.MealId })'"> Delete </button>
